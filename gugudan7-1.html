@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+</head>
+<body>
+    <h1>반복문, if문 활용한 구구단(console)</h1>
+    <script>
+        var n = Number(prompt("몇 단 을 출력할까요? (5 or 6)"));
+        if (n < 2 || n > 9) {
+            console.log("2 ~ 9 사이 값만 입력할 수 있습니다.");
+        } else {
+            console.log(n + "단");
+            for(var j = 1; j < 10; j++) {
+            console.log(n + " * " + j + " = " + (n *j));
+            }
+        }
+
+    </script>
+
+</body>
+</html>
