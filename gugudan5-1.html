@@ -9,12 +9,12 @@
 <body>
     <h1>반복문 활용한 구구단(console)</h1>
     <script>
-        for(var i = 2; i < 10; i++) {
-            console.log(i + "단");
-            for(var j = 1; j < 10; j++) {
-                console.log(i + " * " + j + " = " + (i *j));
-            }
+        var n = Number(prompt("몇 단 을 출력할까요? (5 or 6)"));
+        console.log(n + "단");
+        for(var j = 1; j < 10; j++) {
+            console.log(n + " * " + j + " = " + (n *j));
         }
+        
 
 
     </script>
