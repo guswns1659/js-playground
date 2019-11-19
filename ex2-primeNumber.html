@@ -11,21 +11,17 @@
     <p>소수 판별하는 프로그램</p>
     
     <script>
-        
+        var isPrime = true;
         var n = Number(prompt("숫자를 입력하세요. (2 이상 자연수)"));
         for(var i = 2; i < n; i++) {
             if (n % i === 0) {
-                document.write(n + "은 소수가 아닙니다.");
-                break;
-            } else {
-                if (i === (n-1)) {
-                    document.write(n + "은 소수입니다.");
-                    break;
-                }
-            }
+                isPrime = false;
+            } 
         }
-        if (n === 1 || n ===2 ) {
-                document.write( n + "은 소수입니다.");
+        if (isPrime) {
+            document.write(n + "은 소수입니다.");
+        } else {
+            document.write(n + "은 소수가 아닙니다.");
         }
     
     </script>
