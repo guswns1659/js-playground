@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+</head>
+<body>
+    <h2>for 예제 1 - 1</h2>
+    <p>입력 받은 수의 개수와 합 출력하는 프로그램</p>
+    <script>
+        
+        var n = 1;
+        var count = 0;
+        var total = 0;
+        while (n != 0 ) {
+            var n = Number(prompt("숫자를 입력하세요.(0 = 종료)"));
+            total += n;
+            count++;
+            
+        }
+        document.write("당신의 입력 횟수는 " + count + "이며, 그 수의 합은 " + total + "입니다.");
+        
+    </script>
+
+
+</body>
+</html>
