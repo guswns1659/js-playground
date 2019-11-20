@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+</head>
+<body>
+    <h1>
+        객체와 메소드 활용해 1~10000 사이 소수 화면에 출력하기 
+    </h1>
+    <script>
+        numbers = { 
+            
+            "prime" : [],
+            "isPrime" : function(number) {
+                var isPrime = true;
+                for(var i = 2; i < number; i++){
+                    if(number % i === 0) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+                return isPrime;
+            },
+            "addPrime" : function(number) {
+                for(var i = 2; i < number + 1; i++) {
+                    if(this.isPrime(i)) {
+                        this.prime.push(i);
+                    }
+                }
+            },
+            "getAllPrimes" : function() {
+                for(var i in this.prime) {
+                    document.write((Number(i) + 1) + "번째 소수 : " + this.prime[i] + "<br>");
+                }
+                
+            },
+            
+        };
+
+        numbers.addPrime(10000);
+        numbers.getAllPrimes();
+        
+    </script>
+</body>
+</html>
