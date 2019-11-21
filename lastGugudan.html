@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>마지막 구구단 실습</title>
+</head>
+<body>
+    <h2>사용자에게 입력받은 숫자의 구구단 출력하는 프로그램</h2>
+    <script>
+        var input = prompt("두 개의 숫자를 입력하세요. ex) 8,7");
+        var splitInput = input.split(",");
+        var num1 = Number(splitInput[0]);
+        var num2 = Number(splitInput[1]);
+        
+        gugudan = {};
+        
+        gugudan.calc = function (num1) {
+            arr = [];
+            for(var i = 1; i < num2+1; i++) {
+                arr.push((num1 * i));
+            }
+            return arr;
+        };
+        
+        gugudan.print = function (n, arr) {
+            document.write("<h2>"+ n +"단</h2>");
+            for(var i = 0; i < arr.length; i++) {
+                document.write(n + "*" + (i+1) + "=" + arr[i]+ "<br>");
+            }
+        };
+
+        gugudan.main = function () {
+            document.write("main 함수가 실행합니다.");
+            for(var i = 2; i < num1 +1; i++) {
+                var result = this.calc(i);
+                this.print(i, result);
+
+            }
+            
+        };
+        
+        gugudan.main();
+    
+    </script>
+
+
+
+</body>
+</html>
