@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>함수로 구현하는 구구단</title>
+</head>
+<body>
+    <h2>
+        함수로 구현하는 구구단
+    </h2>
+    <script>
+        function calc(num) {
+            var results = [];
+            for(var i =1; i < 10; i++){
+                results.push(num + " * " + i + " = " + (num * i));
+            }
+            return results;
+        };
+
+        function print(n, results) {
+            document.write("<h2>" + n + "단</h2>");
+            for(var i = 0; i < results.length; i++) {
+                document.write(results[i] + "<br>");
+            }
+        };
+        
+        function main () {
+            document.write("main 함수가 실행됐습니다.<br>");
+            for(var i = 2; i < 10; i++){
+                var result = calc(i);
+                print(i, result);
+            }
+        };
+        main();
+
+    </script>
+
+
+</body>
+</html>
