@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+</head>
+<body>
+    <h2>입력받은 값을 계산하는 계산기 구현</h2>
+    <div>
+        첫번째 수 <input id="input1" type="text"><br>
+        두번째 수 <input id="input2" type="text">
+        <button onclick="calc()">계산</button>
+    </div> <br>
+    <div id="output">알 이즈 웰</div>
+    <script>
+        function calc() {
+            var input1 = document.getElementById('input1');
+            var input2 = document.getElementById('input2');
+            var num1 = input1.value;
+            var num2 = input2.value;
+
+            var output = document.getElementById('output');
+            var str = '';
+            str += "더하기: "+ (num1 + num2) + "<br>";
+            str += "빼기: "+ (num1 - num2) + "<br>";
+            str += "곱하기: "+ (num1 * num2) + "<br>";
+            str += "나누기: "+ (num1 / num2) + "<br>";
+            
+            output.innerHTML = str;
+        };
+        
+        
+        
+
+    </script>
+</body>
+</html>
