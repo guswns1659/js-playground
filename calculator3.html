@@ -24,16 +24,28 @@
 
             var output = document.getElementById('output');
             var str = '';
-            if (oper === "+") {
-                str += "더하기: " + (num1 + num2); 
-            } else if (oper === "-") {
+            // if (oper === "+") {
+            //     str += "더하기: " + (num1 + num2); 
+            // } else if (oper === "-") {
+            //     str += "빼기: " + (num1 - num2);
+            // } else if (oper === "*") {
+            //     str += "곱하기: " + (num1 * num2);
+            // } else {
+            //     str += "나누기: " + (num1 / num2);
+            // }
+            switch (oper) {
+                case "+":
+                str += "더하기: " + (num1 + num2);
+                break;
+                case "-":
                 str += "빼기: " + (num1 - num2);
-            } else if (oper === "*") {
+                break;
+                case "*":
                 str += "곱하기: " + (num1 * num2);
-            } else {
+                break;
+                default:
                 str += "나누기: " + (num1 / num2);
             }
-
             output.innerHTML = str;
 
         };
