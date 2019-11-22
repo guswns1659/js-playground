@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+</head>
+<body>
+    <h2>사용자에게 값과 사칙연산 입력받는 계산기</h2>
+    <div>
+        <input type="text" id="n1"> <br>
+        <input type="text" id="n2"> <br>
+        <input type="text" id="op"> 
+        <button onclick = "calc()" id="btn1">계산</button>
+    </div>
+    <div id="output">입력 준비 중...</div>
+
+    <script>
+        function calc() {
+            var num1 = document.getElementById('n1').value;
+            var num2 = document.getElementById('n2').value;
+            var oper = document.getElementById('op').value;
+
+            var output = document.getElementById('output');
+            var str = '';
+            if (oper === "+") {
+                str += "더하기: " + (num1 + num2); 
+            } else if (oper === "-") {
+                str += "빼기: " + (num1 - num2);
+            } else if (oper === "*") {
+                str += "곱하기: " + (num1 * num2);
+            } else {
+                str += "나누기: " + (num1 / num2);
+            }
+
+            output.innerHTML = str;
+
+        };
+
+
+    </script>
+
+</body>
+</html>
