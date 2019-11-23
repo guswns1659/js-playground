@@ -11,20 +11,22 @@
     <div id="output"></div>
     <script>
 
-        input = {};
+        var input = {"count" : 2};
         input.getFirstValue = function () {
             var num1 = Number(prompt("숫자를 입력하세요."));
             return num1;
         };
+
         input.getSecondValue = function () {
-            var num2 = Number(prompt("숫자를 입력하세요."));
+            var num2 = Number(prompt(this.count + "번째 숫자를 입력하세요."));
+            this.count++;
             return num2;
         };
         input.getOperator = function () {
             while(true){
             var oper = prompt("사칙연산을 입력하세요.");
                 if (oper === "+" || oper === "-" || oper === "*"
-                    || oper === "/" || oper === "q") {
+                    || oper === "/" || oper === "") {
                         return oper;
                         break;
                     }
@@ -34,7 +36,7 @@
             }
         };
 
-        calculator = {};
+        var calculator = {};
         calculator.calculator = function (num1, oper, num2) {
             var result = num1;
             if (oper === "+") {
@@ -52,7 +54,7 @@
             } 
         };
 
-        output = {};
+        var output = {};
         output.print = function (result) {
             var output = document.getElementById('output');
             output.innerHTML = "결과값 : " + result + "입니다.";
@@ -62,7 +64,7 @@
             var result = input.getFirstValue();
             while(true) {
                 var oper = input.getOperator();
-                if (oper === "q") {
+                if (oper === "") {
                     break;
                 }
                 var num2 = input.getSecondValue();
@@ -71,9 +73,7 @@
             output.print(result);
         }
         main();
-     
-
-
+    
     </script>
 
 
