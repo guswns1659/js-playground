@@ -10,8 +10,9 @@
     <h2>사용자에게 값과 사칙연산 입력받는 계산기</h2>
     <div>
         첫번째 수 <input type="text" id="n1"> <br>
+        사칙연산 <input type="text" id="op"> <br>
         두번째 수 <input type="text" id="n2"> <br>
-        사칙연산 <input type="text" id="op"> 
+         
         <button onclick = "calc()" id="btn1">계산</button>
     </div>
     <div id="output">입력 준비 중...</div>
@@ -36,19 +37,22 @@
                 str += "사칙연산만 입력해주세요.";
             }
 
-            // switch (oper) {
-            //     case "+":
-            //     str += "더하기: " + (num1 + num2);
-            //     break;
-            //     case "-":
-            //     str += "빼기: " + (num1 - num2);
-            //     break;
-            //     case "*":
-            //     str += "곱하기: " + (num1 * num2);
-            //     break;
-            //     default:
-            //     str += "나누기: " + (num1 / num2);
-            // }
+            switch (oper) {
+                case "+":
+                str += "더하기: " + (num1 + num2);
+                break;
+                case "-":
+                str += "빼기: " + (num1 - num2);
+                break;
+                case "*":
+                str += "곱하기: " + (num1 * num2);
+                break;
+                case "/":
+                str += "나누기: " + (num1 / num2);
+                break;
+                default:
+                str += "사칙연산을 입력해주세요.";
+            }
             output.innerHTML = str;
 
         };
