@@ -10,55 +10,68 @@
     <h2>함수로 만드는 계산기</h2>
     <div id="output"></div>
     <script>
-        function main() {
-            var input1 = getFirstNum();
-            var calcResult = getSecondNum(input1);
-            var result = print(calcResult);
-            return result;
-        }
 
-        function getFirstNum() {
-            var input1 = Number(prompt("숫자를 입력하세요."));
-            return input1;
+        function getFirstValue() {
+            var num1 = Number(prompt("숫자를 입력하세요."));
+            return num1;
         };
         
-        function getSecondNum(input1) {
-            var result = input1;
-            
-            while(true) {
-            var oper = prompt("사칙연산식을 입력하세요.");
-                if (oper === "q") {
-                    break;
-                }
-            var input3 = Number(prompt("숫자를 입력하세요."));
-            var calcresult = calc(result, oper, input3);
-            }
-            return calcresult;
-
+        function getSecondValue() {
+            var num2 = Number(prompt("숫자를 입력하세요."));
+            return num2;
         };
 
-        function calc(result, oper, input3) {
-            if (oper === "+") {
-                result += input3; 
-            } else if (oper === "-") {
-                result -= input3; 
-            } else if (oper === "*") {
-                result *= input3; 
-            } else if (oper === "/"){
-                result /= input3; 
-            } else {
-                result = "올바른 사칙연산을 입력해주세요.";
+        function getOperator () {
+            while(true){
+            var oper = prompt("사칙연산을 입력하세요.");
+                if (oper === "+" || oper === "-" || oper === "*"
+                    || oper === "/" || oper === "q") {
+                        return oper;
+                        break;
+                    }
+                else {
+                    alert("올바른 사칙연산을 입력하세요.");
+                }
             }
-            return result;
+        };
+
+        function calculator(num1, oper, num2) {
+            var result = num1;
+
+            if (oper === "+") {
+                result += num2;
+                return result 
+            } else if (oper === "-") {
+                result -= num2; 
+                return result 
+            } else if (oper === "*") {
+                result *= num2; 
+                return result 
+            } else if (oper === "/"){
+                result /= num2; 
+                return result 
+            } 
         };
         
         function print(result) {
             var output = document.getElementById('output');
             return output.innerHTML = "최종 결과 값은 " + result + "입니다.";
         }
-        main();
      
+        function main() {
+            var result = getFirstValue();
+            while(true) {
+                var oper = getOperator();
+                if (oper === "q") {
+                    break;
+                }
+                var num2 = getSecondValue();
+                result = calculator(result, oper, num2);
+            }
+            print(result);
+        };
 
+        main();
 
     </script>
 
