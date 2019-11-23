@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+</head>
+<body>
+    <h2>여러 값을 입력받는 계산기</h2>
+    <div id="output">
+    </div>
+    <script>
+        function calc() {
+            var input1 = Number(prompt("숫자를 입력하세요."));
+            var result = input1;
+            var output = document.getElementById('output');
+
+            while(true) {
+            var oper = prompt("사칙연산식을 입력하세요.");
+                if (oper === "q") {
+                    break;
+                }
+            var input3 = Number(prompt("숫자를 입력하세요."));
+
+                if (oper === "+") {
+                    result += input3; 
+                } else if (oper === "-") {
+                    result -= input3; 
+                } else if (oper === "*") {
+                    result *= input3; 
+                    
+                } else if (oper === "/"){
+                    result /= input3; 
+                } else {
+                    document.write("올바른 사칙연산을 입력해주세요.");
+                }
+
+            }
+            output.innerHTML = "최종 결과 값은 " + result + "입니다.";
+        };
+        calc();
+
+     
+
+
+    </script>
+
+
+</body>
+</html>
