@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+</head>
+<body>
+    <h2>함수로 만드는 계산기</h2>
+    <div id="output"></div>
+    <script>
+        function main() {
+            var input1 = getFirstNum();
+            var calcResult = getSecondNum(input1);
+            var result = print(calcResult);
+            return result;
+        }
+
+        function getFirstNum() {
+            var input1 = Number(prompt("숫자를 입력하세요."));
+            return input1;
+        };
+        
+        function getSecondNum(input1) {
+            var result = input1;
+            
+            while(true) {
+            var oper = prompt("사칙연산식을 입력하세요.");
+                if (oper === "q") {
+                    break;
+                }
+            var input3 = Number(prompt("숫자를 입력하세요."));
+            var calcresult = calc(result, oper, input3);
+            }
+            return calcresult;
+
+        };
+
+        function calc(result, oper, input3) {
+            if (oper === "+") {
+                result += input3; 
+            } else if (oper === "-") {
+                result -= input3; 
+            } else if (oper === "*") {
+                result *= input3; 
+            } else if (oper === "/"){
+                result /= input3; 
+            } else {
+                result = "올바른 사칙연산을 입력해주세요.";
+            }
+            return result;
+        };
+        
+        function print(result) {
+            var output = document.getElementById('output');
+            return output.innerHTML = "최종 결과 값은 " + result + "입니다.";
+        }
+        main();
+     
+
+
+    </script>
+
+
+</body>
+</html>
