@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>
+        객체로 구현한 소수 판별 프로그램
+    </h2>
+    <div>
+        숫자를 입력하세요.<input id="input1" type="text">
+        <button onclick="check()">확인</button>
+    </div> <br>
+    <div id="output">결과가 나옵니다.</div>
+
+    <script>
+        var input = {};
+        //입력받은 숫자 input 객체에 저장
+        input.getInput = function () {
+            var num = document.getElementById('input1').value;
+            input.num = Number(num);
+
+        };
+        
+        //소수인지 아닌지 출력하는 함수
+        function output(num, isPrime) {
+            var str = isPrime;
+            if (str === true) {
+                str = '소수입니다.'
+            } else {
+                str = '소수가 아닙니다.'
+            }
+            var output = document.getElementById('output');
+            output.innerHTML =num + '은 '+ str;
+            
+        };
+        
+        //입력받은 숫자 소수인지 판별하는 함수
+        function check() {
+            input.getInput();
+
+            var isPrime = true;
+            for(var i = 2; i < input.num; i++){
+                if(input.num % i ===0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+            output(input.num, isPrime);
+        };
+
+    </script>
+</body>
+</html>
