@@ -1,8 +1,25 @@
-var clickNumbers = function(event) {
-    console.log("click Numbers");
-    console.log(event.target.innerHTML);
+var input = {'array' : []};
+input.getInput = function () {
+    return this.array.join("");
 };
-var clickOthers = function(event) {
-    console.log("click Others");
-    console.log(event.target.innerHTML);
-};
+
+var output = {};
+output.text = document.getElementById('output');
+
+function clickNumbers(event) {
+    console.log("clickNumbers");
+    var str = event.target.innerHTML;
+    console.log(str);
+    if (str === "BS") {
+        input.array.pop();
+    } else {
+        input.array.push(str);
+    }
+    output.text.innerHTML = input.getInput();
+}
+
+function showResult(event) {
+    console.log("showResult");
+    
+
+}
