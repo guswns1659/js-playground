@@ -12,11 +12,19 @@ function clickNumbers(event) {
     console.log(str);
     if (str === "BS") {
         input.array.pop();
+    } else if (str === "+" || str === "-" || str === "*" || str === "/") {
+        input.array.push(" " + str + " ");
     } else {
         input.array.push(str);
     }
-    output.text.innerHTML = input.getInput();
-}
+    if (input.array.length === 0) {
+        output.text.innerHTML = "Empty";
+    } else {
+        output.text.innerHTML = input.getInput();
+    }
+
+
+};
 
 function showResult(event) {
     console.log("showResult");
