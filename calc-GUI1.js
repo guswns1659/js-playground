@@ -10,6 +10,7 @@ function clickNumbers(event) {
     console.log("clickNumbers");
     var str = event.target.innerHTML;
     console.log(str);
+
     if (str === "BS") {
         input.array.pop();
     } else if (str === "+" || str === "-" || str === "*" || str === "/") {
@@ -22,12 +23,31 @@ function clickNumbers(event) {
     } else {
         output.text.innerHTML = input.getInput();
     }
-
-
 };
 
 function showResult(event) {
     console.log("showResult");
-    
-
+    var expr = input.getInput();
+    var splitExpr = expr.split(" ");
+    var result = calc(splitExpr);
+    output.text.innerHTML = result;
 }
+
+function calc(splitExpr) {
+    var result = Number(splitExpr[0]);
+    for(var i = 1; i <splitExpr.length; i++) {
+        if (splitExpr[i] === "+") {
+            result += Number(splitExpr[i+1]);
+        }
+        else if (splitExpr[i] === "-") {
+            result -= Number(splitExpr[i+1]);
+        }
+        else if (splitExpr[i] === "*") {
+            result *= Number(splitExpr[i+1]);
+        }
+        else if (splitExpr[i] === "/") {
+            result /= Number(splitExpr[i+1]);
+        }
+    }
+    return result;  
+};
