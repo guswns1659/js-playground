@@ -1,12 +1,16 @@
-var readInput = function() {
-    var input = document.getElementById('input1');
+var el = document.getElementById('test');
+
+var input = document.createElement('input');
+input.id = 'input';
+input.type = 'text';
+
+var btn = document.createElement('button');
+btn.onclick = main;
+btn.innerHTML ='클릭';
+
+el.appendChild(input);
+el.appendChild(btn);
+
+function main() {
     console.log(input.value);
-};
-
-var btn2 = document.createElement('button');
-btn2.innerHTML = '다른 클릭';
-btn2.onclick = readInput;
-
-var test = document.getElementById('test');
-test.appendChild(document.createElement('br'));
-test.appendChild(btn2);
+}
