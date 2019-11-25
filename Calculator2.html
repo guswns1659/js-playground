@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>계산기 구현2</h2>
+    <div>
+        첫번째 숫자 입력하세요.<input id="input1" type="text"><br>
+        두번째 숫자 입력하세요.<input id="input2" type="text">
+        <button onclick="main()">클릭</button>
+    </div>
+    <div id="output">계산 출력</div>
+    <script>
+        var num1;
+        var num2;
+
+        function input() {
+            var input1 = document.getElementById('input1').value;
+            var input2 = document.getElementById('input2').value;
+            num1 = Number(input1);
+            num2 = Number(input2);
+        };
+        function calc() {
+            var str = '';
+            str += num1 + num2 +"<br>";
+            str += num1 - num2 +"<br>";
+            str += num1 * num2 +"<br>";
+            str += num1 / num2 +"<br>";
+            return str;
+        }
+
+        function print() {
+            var output = document.getElementById('output');
+            output.innerHTML = calc();
+        }
+        function main() {
+            input();
+            print();
+        };
+
+    </script>
+</body>
+
+</html>
