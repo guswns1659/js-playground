@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>사용자가 입력하는 구구단 프로그램</h2>
+    <div>
+        숫자를 입력하세요. ex) 8,7 <input id="input" type="text">
+        <button onclick="main()">클릭</button>
+    </div>
+    <div id="output">결과는 여기서 나옵니다.</div>
+
+    <script>
+        gugudan ={};
+        gugudan.num1;
+        gugudan.num2;
+        gugudan.result = [];
+
+        gugudan.getInputNums = function () {
+            var inputArr = document.getElementById('input').value.split(",");
+            this.num1 = Number(inputArr[0]);
+            this.num2 = Number(inputArr[1]);
+        };
+
+        gugudan.calc = function () {
+            for(var i = 2; i < this.num1+1; i++){
+                this.result.push("<h2>"+ i + "단</h2>");
+                for(var j=1; j < this.num2+1; j++){
+                    this.result.push(i + " * " + j + " = " + (i * j));
+                }
+            }
+        };
+
+        gugudan.print = function () {
+            var result ='';
+            for(var i =0; i < this.result.length; i++){
+                result += this.result[i] + "<br>";
+            }
+            return result;
+        };
+
+        function main() {
+            gugudan.getInputNums();
+            gugudan.calc();
+            document.getElementById('output').innerHTML = gugudan.print();
+        };
+
+
+
+
+    </script>
+
+</body>
+</html>
