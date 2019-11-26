@@ -1,88 +1,82 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Calculator</title>
 </head>
-
 <body>
-    <h2>계산기 구현7</h2>
+    <h2>계산기7 : Calculator made by Object.</h2>
     <div>
-        식을 입력하세요. <input id="input" type="text">
+        연산식을 입력하세요. ex) 3 + 4 / 4 <input id='input' type="text">
         <button onclick="main()">클릭</button>
     </div>
-    <div id="output">결과는 여기서</div>
-    <script>
+    <div id="output">결과는 이곳에서.. </div>
 
-        //input 객체
+    <script>
         var input = {};
-        
-        //입력받은 연산식을 배열로 리턴
         input.getInputExpr = function () {
             this.list = document.getElementById('input').value.split(" ");
             return this.list;
         };
-        // 배열이 비었는지 확인
         input.isEmpty = function () {
             return this.list.length === 0;
         };
-        // 배열 앞에서 값을 꺼내오는 메소드
         input.getValue = function () {
             var str = this.list.shift();
             var n = Number(str);
-            return n
+            return n; 
         };
-        // 배열 앞에서 연산자 꺼내는 메소드
         input.getOper = function () {
             var oper = this.list.shift();
-            if (oper === "+" || oper === "-" || oper === "*" || oper === "/" ){
+            if (oper === "+" || oper === "-" || oper === "*" || oper === "/") {
                 return oper;
             } else {
-                return "%";
+                return "?";
             }
         };
 
         var calculator = {};
-        // 입력받은 숫자와 사칙연산 계산
         calculator.calculate = function (first, second, oper) {
-            this.result;
-            if (oper === "+") {
-                this.result = first + second;
-            } else if (oper === "-") {
-                this.result = first - second;
-            } else if (oper === "*") {
-                this.result = first * second;
-            } else if (oper === "/") {
-                this.result = first / second;
-            } else {
+            this.result = first;
+            switch (oper) {
+                case "+":
+                this.result = this.result + second;
+                break;
+                case "-":
+                this.result = this.result - second;
+                break;
+                case "*":
+                this.result = this.result * second;
+                break;
+                case "/":
+                this.result = this.result / second;
+                break;
+                default:
                 return NaN;
             }
             return this.result;
         };
 
-        //출력 객체
         var printer = {};
-        //결과 출력
-        printer.print = function (result) {
+        printer.print = function () {
             var output = document.getElementById('output');
-            output.innerHTML = "결과는 " + result;
+            output.innerHTML = "결과 : " + calculator.result;
         }
 
         function main() {
             input.getInputExpr();
-            var result = input.getValue();
+            calculator.result = input.getValue();
             while(!input.isEmpty()) {
                 var oper = input.getOper();
                 var second = input.getValue();
-                result = calculator.calculate(result, second, oper);
+                calculator.calculate(calculator.result, second, oper);
             }
-            printer.print(result);
-        };
+            printer.print();
+        }
 
     </script>
-</body>
 
+</body>
 </html>
