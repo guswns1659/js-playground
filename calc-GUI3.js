@@ -1,85 +1,106 @@
+
+
 var input = {'array':[]};
-input.getInputStr = function (){
+input.getInput = function (){
     return input.array.join("");
 };
-input.getCalcArray = function () {
-    this.calcArr = this.getInputStr().split(" ");
+
+input.removeAll = function (value) {
+    this.array = [];
+    this.array.push(value);
 };
+
+input.isEmpty = function () {
+    return this.array.length === 0;
+};
+
+input.prepareCalculate = function () {
+    this.array = this.array.join("").split(" ");
+};
+
 input.getValue = function () {
-    return this.calcArr.shift();
+    var str = this.array.shift();
+    var n = Number(str);
+    return n;
 };
-input.getOper = function () {
-    var oper = this.calcArr.shift();
+
+input.getOperator = function () {
+    var oper = this.array.shift();
     if (oper === "+" || oper === "-" || oper === "*" || oper === "/") {
         return oper;
     } else {
         return '?';
     }
 };
-input.isEmpty = function () {
-    return this.calcArr.length === 0;
+
+output = {};
+output.text = document.getElementById('output');
+
+output.print = function (str) {
+    this.text.innerHTML = str;
 };
 
-input.getInputArr = function (str) {
-    switch (str){
-        case 'BS':
-            this.array.pop();
-            break;
-        case '+':
-        case '-':
-        case '*':
-        case '/':
-            this.array.push(' '+str+' ');
-            break;
-        default:
-            this.array.push(str);
-    }
-    if (this.array.length === 0){
-        printer.text.innerHTML = 'Empty';
-    } else {
-       printer.text.innerHTML = this.getInputStr();
-    }
+output.display = function () {
+    this.text.innerHTML = input.getInput();
 };
 
-var calculator = {'result':0};
+var calculator = {};
+
 calculator.calculate = function (first, second, oper) {
-    this.result = first;
+    var result = first;
     switch (oper){
         case '+':
-            this.result += second;
+            result += second;
             break;
         case '-':
-            this.result -= second;
+            result -= second;
             break;
         case '*':
-            this.result *= second;
+            result *= second;
             break;
         case '/':
-            this.result /= second;
+            result /= second;
             break;
         default:
             return NaN;
     }
+    return result;
 };
 
-printer = {};
-printer.text = document.getElementById('output')
 
-
-function clickNumbers(event) {
+//숫자 버튼의 핸들러 함수 
+var clickNumbers = function (event) {
     var str = event.target.innerHTML;
     console.log(str);
-    input.getInputArr(str);
-    input.getCalcArray();
+
+    if (str === 'BS') {
+        input.array.pop();
+    } else if (str === '+' || str === '-' || str === '*' || str === '/') {
+        input.array.push(' ' + str + ' ');
+
+    } else {
+        input.array.push(str);
+    }
+
+    if (input.isEmpty()) {
+        output.text.innerHTML = "Empty";
+    } else {
+        output.display();
+    }
 };
 
-function getResult(event) {
-    console.log(event.target.innerHTML);
-    calculator.result = input.getValue();
-    while(!input.isEmpty()){
-        var oper = input.getOper();
+
+// '=' 버튼의 핸들러 함수
+var getResult = function (event) {
+    input.prepareCalculate();
+    
+    var result = input.getValue();
+
+    while (!input.isEmpty()) {
+        var op = input.getOperator();
         var second = input.getValue();
-        calculator.calculate(calculator.result, second, oper);
+        result = calculator.calculate(result, second, op);
     }
-    printer.text.innerHTML = calculator.result;  
+    output.print(result);
+    input.removeAll(result);
 };
