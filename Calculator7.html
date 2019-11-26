@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>계산기 구현7</h2>
+    <div>
+        식을 입력하세요. <input id="input" type="text">
+        <button onclick="main()">클릭</button>
+    </div>
+    <div id="output">결과는 여기서</div>
+    <script>
+
+        //input 객체
+        var input = {};
+        //입력받은 연산식을 배열로 분할
+        input.getInputExpr = function () {
+            this.expr = document.getElementById('input').value.split(" ");
+            return this.expr;
+        };
+        //연산자인지 판별하는 메소드 
+        input.isOper = function (op) {
+            var isOper = false;
+            if (op === '+' || op === '-' || op === '*' || op === '/') {
+                isOper = true;
+            }
+            return isOper;
+        };
+
+        //계산 객체
+        var calculator = {};
+        //인자로 주어진 값들 계산하는 메소드
+        calculator.calculate = function (oper, result, second) {
+            this.result = result;
+            if (input.isOper(oper)) {
+                if (oper === "+") {
+                    this.result = this.result + second;
+                } else if (oper === "-") {
+                    this.result = this.result - second;
+                } else if (oper === "*") {
+                    this.result = this.result * second;
+                } else if (oper === "/") {
+                    this.result = this.result / second;
+                }
+            }
+            return this.result;
+        }
+        // 입력받은 계산식 하나씩 꺼내는 메소드
+        calculator.pop = function () {
+            this.result = Number(input.expr[0]);
+            for (var i = 1; i < input.expr.length; i++) {
+                var oper = input.expr[i];
+                var second = Number(input.expr[i + 1]);
+                this.result = this.calculate(oper, this.result, second)
+            }
+            return this.result;
+        };
+
+        //출력 객체
+        var printer = {};
+        //결과 출력
+        printer.print = function (result) {
+            var output = document.getElementById('output');
+            output.innerHTML = "결과는 " + result;
+        }
+
+        function main() {
+            input.getInputExpr();
+            calculator.pop();
+            printer.print(calculator.result);
+        };
+
+    </script>
+</body>
+
+</html>
