@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>계산기 구현6</h2>
+    <div>
+        <button onclick="main()">클릭</button>
+    </div>
+    <div id="output">계산 출력</div>
+    <script>
+        //input 객체
+        var input = {n:2};
+
+        //첫번째로 입력받은 값 리턴
+        input.getInputNum1 = function () {
+            this.num1 = Number(prompt("첫번째 숫자를 입력하세요."));
+            return this.num1;
+        };
+        //두번째로 입력받은 값 리턴
+        input.getInputNum2 = function () {
+            this.num2 = Number(prompt(this.n + "번째 숫자를 입력하세요."));
+            this.n++;
+            return this.num2;
+        };
+        //입력받은 연산자 리턴
+        input.getInputOper = function () {
+            while (true) {
+                var op = prompt("사칙연산을 입력하세요.");
+                if (op === '+' || op === '-' || op === '*' || op === '/' || op === "q") {
+                    break;
+                } else {
+                    alert("올바른 사칙연산을 입력해주세요.");
+                }
+
+            }
+            return op;
+        };
+
+        //계산 객체
+        var calculator = {};
+        // 입력받은 숫자와 사칙연산 계산
+        calculator.calculate = function (first, second, oper) {
+            this.result;
+            if (oper === "+") {
+                this.result = first + second;
+            } else if (oper === "-") {
+                this.result = first - second;
+            } else if (oper === "*") {
+                this.result = first * second;
+            } else if (oper === "/") {
+                this.result = first / second;
+            } 
+            return this.result;
+        };
+        
+        //출력 객체
+        var printer = {};
+        //결과 출력
+        printer.print = function (result) {
+            var output = document.getElementById('output');
+            output.innerHTML = "결과는 " + result;
+        }
+
+        //반복적인 입력 수행
+        function main() {
+            var result = input.getInputNum1();
+            while(true) {
+                var oper = input.getInputOper();
+                if (oper === "q"){
+                    break;
+                }
+                var second = input.getInputNum2();
+                result = calculator.calculate(result, second, oper);
+            }
+            printer.print(result);
+        };
+
+    </script>
+</body>
+
+</html>
