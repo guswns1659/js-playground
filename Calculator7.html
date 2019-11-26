@@ -19,45 +19,46 @@
 
         //input 객체
         var input = {};
-        //입력받은 연산식을 배열로 분할
+        
+        //입력받은 연산식을 배열로 리턴
         input.getInputExpr = function () {
-            this.expr = document.getElementById('input').value.split(" ");
-            return this.expr;
+            this.list = document.getElementById('input').value.split(" ");
+            return this.list;
         };
-        //연산자인지 판별하는 메소드 
-        input.isOper = function (op) {
-            var isOper = false;
-            if (op === '+' || op === '-' || op === '*' || op === '/') {
-                isOper = true;
+        // 배열이 비었는지 확인
+        input.isEmpty = function () {
+            return this.list.length === 0;
+        };
+        // 배열 앞에서 값을 꺼내오는 메소드
+        input.getValue = function () {
+            var str = this.list.shift();
+            var n = Number(str);
+            return n
+        };
+        // 배열 앞에서 연산자 꺼내는 메소드
+        input.getOper = function () {
+            var oper = this.list.shift();
+            if (oper === "+" || oper === "-" || oper === "*" || oper === "/" ){
+                return oper;
+            } else {
+                return "%";
             }
-            return isOper;
         };
 
-        //계산 객체
         var calculator = {};
-        //인자로 주어진 값들 계산하는 메소드
-        calculator.calculate = function (oper, result, second) {
-            this.result = result;
-            if (input.isOper(oper)) {
-                if (oper === "+") {
-                    this.result = this.result + second;
-                } else if (oper === "-") {
-                    this.result = this.result - second;
-                } else if (oper === "*") {
-                    this.result = this.result * second;
-                } else if (oper === "/") {
-                    this.result = this.result / second;
-                }
-            }
-            return this.result;
-        }
-        // 입력받은 계산식 하나씩 꺼내는 메소드
-        calculator.pop = function () {
-            this.result = Number(input.expr[0]);
-            for (var i = 1; i < input.expr.length; i++) {
-                var oper = input.expr[i];
-                var second = Number(input.expr[i + 1]);
-                this.result = this.calculate(oper, this.result, second)
+        // 입력받은 숫자와 사칙연산 계산
+        calculator.calculate = function (first, second, oper) {
+            this.result;
+            if (oper === "+") {
+                this.result = first + second;
+            } else if (oper === "-") {
+                this.result = first - second;
+            } else if (oper === "*") {
+                this.result = first * second;
+            } else if (oper === "/") {
+                this.result = first / second;
+            } else {
+                return NaN;
             }
             return this.result;
         };
@@ -72,8 +73,13 @@
 
         function main() {
             input.getInputExpr();
-            calculator.pop();
-            printer.print(calculator.result);
+            var result = input.getValue();
+            while(!input.isEmpty()) {
+                var oper = input.getOper();
+                var second = input.getValue();
+                result = calculator.calculate(result, second, oper);
+            }
+            printer.print(result);
         };
 
     </script>
