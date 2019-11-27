@@ -56,8 +56,6 @@ game.checkGood = function () {
     return this.answer === this.letter.join("");
 };
 
-
-
 game.btnsCopyText = function () {
     for (let j = 0; j < this.letter.length; j++) {
         this.btns[j].innerHTML = this.letter[j];
@@ -111,7 +109,8 @@ game.progress = function () {
         progress.innerHTML = str;
     }
     if(this.current === this.max_count){
-        alert('Thank you for playing');
+        let t2 = Date.now();
+        alert('Thank you for playing\n' + ((t2-t1) * 0.001) + '초 소요');
     }
 };
 
@@ -145,5 +144,6 @@ game.shuffle = function () {
     }
 };
 
+let t1 = Date.now();
 game.init();
 game.shuffle();
