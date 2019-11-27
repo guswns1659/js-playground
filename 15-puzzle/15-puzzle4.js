@@ -2,11 +2,16 @@
 let word1 = document.getElementById('word1'); // answer
 let word2 = document.getElementById('word2'); // buttons
 let check = document.getElementById('check'); // word1 === word2?
+let progress = document.getElementById('progress'); // progress
 
 
 // game객체
 // 게임할 때 필요한 기능을 포함한다.
-let game = { 'btns': [] };
+let game = {
+    'btns': [],
+    'max_count': 3,
+    'current': 0
+};
 game.wordList = 'apple,smartphone,notebook,elephant,earphone,idol,Haruki,forest'.split(',');
 game.choose = function () {
     let randomNum = Math.floor(Math.random() * (this.wordList.length));
@@ -23,7 +28,7 @@ game.addbuttons = function () {
     }
 };
 game.check = function () {
-    if (this.answer === this.letter.join("")) {
+    if (this.checkGood()) {
         check.innerHTML = '일치합니다.';
     } else {
         check.innerHTML = '일치하지 않습니다.';
@@ -37,7 +42,21 @@ game.init = function () {
     this.addbuttons();
     this.check();
 };
-game.init();
+
+//정답 맞추면 word2 속 버튼을 지우는 메소드
+game.removeButtons = function () {
+    for (let j = 0; j<this.btns.length; j++) { 
+        word2.removeChild(this.btns[j]);
+    }
+    this.btns = [];
+};
+
+// 정답이지 아닌지 확인하는 메소드.
+game.checkGood = function () {
+    return this.answer === this.letter.join("");
+};
+
+
 
 game.btnsCopyText = function () {
     for (let j = 0; j < this.letter.length; j++) {
@@ -45,25 +64,71 @@ game.btnsCopyText = function () {
     }
 };
 
+game.swap = function () {
+    // let s = this.letter.reverse();
+
+    // reverse() 쓰지 않고 구현한 뒤집기.
+    let reverseArr = [];
+
+    while(this.letter.length != 0){
+        let popStr = this.letter.pop();
+        reverseArr.push(popStr);
+    }
+    this.letter = reverseArr;
+
+    this.btnsCopyText();
+    this.check();
+
+};
+
+game.rshift = function () {
+    let s = this.letter.pop();
+    this.letter.unshift(s);
+    this.btnsCopyText();
+    this.check();
+};
+
+game.lshift = function () {
+    let s = this.letter.shift();
+    this.letter.push(s);
+    this.btnsCopyText();
+    this.check();
+};
+
+//횟수 측정하고 정답을 표시하는 메소드
+game.progress = function () {
+    if(this.checkGood()){
+        this.current++;
+        this.removeButtons();
+        this.init();
+        this.shuffle();
+
+        let str='';
+        
+        for(let i = 0; i < this.current; i++) {
+            str += '0';
+        }
+        progress.innerHTML = str;
+    }
+    if(this.current === this.max_count){
+        alert('Thank you for playing');
+    }
+};
+
 // event handler for swap
 function swap() {
-    let s = game.letter.reverse();
-    game.btnsCopyText();
-    game.check();
+    game.swap();
+    game.progress();
 };
 
 function rshift(event) {
-    let s = game.letter.pop();
-    game.letter.unshift(s);
-    game.btnsCopyText();
-    game.check();
+    game.rshift();
+    game.progress();
 };
 
 function lshift(event) {
-    let s = game.letter.shift();
-    game.letter.push(s);
-    game.btnsCopyText();
-    game.check();
+    game.lshift();
+    game.progress();
 };
 
 // shuffle 
@@ -71,12 +136,14 @@ function lshift(event) {
 game.shuffle = function () {
     let toggle = (Math.floor(Math.random() * 2) === 0)
     if (toggle) {
-        swap();
+        this.swap();
     }
 
     let n = Math.floor(Math.random() * this.letter.length);
     for (let y = 0; y < n; y++) {
-        rshift();
+        this.rshift();
     }
 };
+
+game.init();
 game.shuffle();
