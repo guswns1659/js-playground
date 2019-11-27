@@ -1,4 +1,5 @@
 input = {'array':[]};
+
 input.getInput = function (){
     return input.array.join("");
 }
