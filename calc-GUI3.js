@@ -1,64 +1,67 @@
+// Calculator
+// by Hyunjun
+// 2019.11.27
 
+// input 객체
+// input를 받는 역할
+const input = { 'array': [] };
 
-var input = {'array':[]};
-input.getInput = function (){
-    return input.array.join("");
+// 입력받은 문자열 리턴하는 메소드
+input.getInput = function () {
+    return this.array.join("");
 };
 
-input.removeAll = function (value) {
-    this.array = [];
-    this.array.push(value);
-};
-
-input.isEmpty = function () {
-    return this.array.length === 0;
-};
-
+// 계산할 수 있게 array를 구성하는 메소드
 input.prepareCalculate = function () {
-    this.array = this.array.join("").split(" ");
+    this.array = this.getInput().split(" ");
 };
 
+// 수식의 값을 가져오는 메소드
 input.getValue = function () {
-    var str = this.array.shift();
-    var n = Number(str);
+    let str = this.array.shift();
+    let n = Number(str);
     return n;
 };
 
+//수식의 연산자를 가져오는 메소드
 input.getOperator = function () {
-    var oper = this.array.shift();
-    if (oper === "+" || oper === "-" || oper === "*" || oper === "/") {
-        return oper;
+    let str = this.array.shift();
+    if (str === "+" || str === "-" || str === "*" || str === "/") {
+        return str;
     } else {
         return '?';
     }
 };
 
-output = {};
-output.text = document.getElementById('output');
-
-output.print = function (str) {
-    this.text.innerHTML = str;
+// 수식이 비었는지 확인하는 메소드
+input.isEmpty = function () {
+    return this.array.length === 0;
 };
 
-output.display = function () {
-    this.text.innerHTML = input.getInput();
+// 수식을 초기화시키고 결과값을 추가하는 메소드
+input.removeAll = function (value) {
+    input.array = [];
+    input.array.push(value);
 };
 
-var calculator = {};
+// Calculator객체
+// 계산을 담당한다.
+const calculator = {};
 
-calculator.calculate = function (first, second, oper) {
-    var result = first;
-    switch (oper){
-        case '+':
+// 입력받은 숫자와 연산자를 계산하는 메소드
+calculator.calculate = function (first, oper, second) {
+    let result = first;
+    switch (oper) {
+        case "+":
             result += second;
             break;
-        case '-':
+        case "-":
             result -= second;
             break;
-        case '*':
+        case "*":
             result *= second;
             break;
-        case '/':
+        case "/":
             result /= second;
             break;
         default:
@@ -67,40 +70,43 @@ calculator.calculate = function (first, second, oper) {
     return result;
 };
 
+// output 객체
+// 출력을 담당한다.
+const output = {};
+output.text = document.getElementById('output');
 
-//숫자 버튼의 핸들러 함수 
-var clickNumbers = function (event) {
-    var str = event.target.innerHTML;
-    console.log(str);
+// 수식을 결과창에 출력하는 메소드
+output.display = function (str) {
+    output.text.innerHTML = str;
+}
 
-    if (str === 'BS') {
+// 숫자 버튼의 핸들러 함수
+function clickNumbers(event) {
+    let str = event.target.innerHTML;
+    if (str === "BS") {
         input.array.pop();
-    } else if (str === '+' || str === '-' || str === '*' || str === '/') {
+    } else if (str === "+" || str === "-" || str === "*" || str === "/") {
         input.array.push(' ' + str + ' ');
-
     } else {
         input.array.push(str);
     }
-
-    if (input.isEmpty()) {
-        output.text.innerHTML = "Empty";
+    if (input.array.length === 0) {
+        output.display("Empty");
     } else {
-        output.display();
+        let inputStr = input.getInput();
+        output.display(inputStr);
     }
 };
 
-
-// '=' 버튼의 핸들러 함수
-var getResult = function (event) {
+// '=' 버튼의 핸들러 함수.
+function getResult(event) {
     input.prepareCalculate();
-    
-    var result = input.getValue();
-
-    while (!input.isEmpty()) {
-        var op = input.getOperator();
-        var second = input.getValue();
-        result = calculator.calculate(result, second, op);
+    let result = input.getValue();
+    while(!input.isEmpty()){
+        let oper = input.getOperator();
+        let second = input.getValue();
+        result = calculator.calculate(result, oper, second);
     }
-    output.print(result);
+    output.display(result);
     input.removeAll(result);
 };
