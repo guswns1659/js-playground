@@ -1,51 +1,68 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Calculator</title>
+    <title>Document</title>
 </head>
-<body>
-    <h2>여러 값을 입력받는 계산기</h2>
-    <div id="output">
-    </div>
-    <script>
-        function calc() {
-            var input1 = Number(prompt("숫자를 입력하세요."));
-            var result = input1;
-            var output = document.getElementById('output');
 
+<body>
+    <h2>계산기 구현4</h2>
+    <div>
+        <button onclick="print()">클릭</button>
+    </div>
+    <div id="output">계산 출력</div>
+    <script>
+
+        function getInputNum1() {
+            var num1 = Number(prompt("첫번째 숫자를 입력하세요."));
+            return num1;
+        };
+        function getInputNum2(n) {
+            var num2 = Number(prompt(n + "번째 숫자를 입력하세요."));
+            return num2;
+        };
+        function getInputOper() {
+            var oper = prompt("사칙연산을 입력하세요.");
+            return oper;
+        };
+        // 입력받은 숫자와 사칙연산 계산
+        function calc() {
+            var result = getInputNum1();
+            var n = 2;
             while(true) {
-            var oper = prompt("사칙연산식을 입력하세요.");
+                var oper = getInputOper();
                 if (oper === "q") {
                     break;
+                } else if (oper !='+' && oper !='-' && oper != '*' && oper !='/') {
+                    alert("올바른 사칙연산을 입력해주세요.");
+                    oper = getInputOper();
                 }
-            var input3 = Number(prompt("숫자를 입력하세요."));
-
-                if (oper === "+") {
-                    result += input3; 
-                } else if (oper === "-") {
-                    result -= input3; 
-                } else if (oper === "*") {
-                    result *= input3; 
-                    
-                } else if (oper === "/"){
-                    result /= input3; 
-                } else {
-                    document.write("올바른 사칙연산을 입력해주세요.");
+                var num2 = getInputNum2(n);
+                if(oper === "+") {
+                    result += num2;
+                } else if(oper === "-"){
+                    result -= num2;
+                } else if(oper === "*") {
+                    result *= num2;
+                } else if(oper === "/") {
+                    result /= num2;
                 }
-
+                n++; 
             }
-            output.innerHTML = "최종 결과 값은 " + result + "입니다.";
-        };
-        calc();
+            return result;
+        }
 
-     
-
+        //결과 출력
+        function print() {
+            var output = document.getElementById('output');
+            output.innerHTML = "결과는 " + calc();
+        }
+        
 
     </script>
-
-
 </body>
+
 </html>

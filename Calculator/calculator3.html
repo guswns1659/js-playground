@@ -1,64 +1,65 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Calculator</title>
+    <title>Document</title>
 </head>
+
 <body>
-    <h2>사용자에게 값과 사칙연산 입력받는 계산기</h2>
+    <h2>계산기 구현3</h2>
     <div>
-        첫번째 수 <input type="text" id="n1"> <br>
-        사칙연산 <input type="text" id="op"> <br>
-        두번째 수 <input type="text" id="n2"> <br>
-         
-        <button onclick = "calc()" id="btn1">계산</button>
+        첫번째 숫자 입력하세요.<input id="input1" type="text"><br>
+        사칙연산을 입력하세요.<input id="oper" type="text"><br>
+        두번째 숫자 입력하세요.<input id="input3" type="text">
+        <button onclick="main()">클릭</button>
     </div>
-    <div id="output">입력 준비 중...</div>
-
+    <div id="output">계산 출력</div>
     <script>
+        var num1;
+        var oper;
+        var num2;
+
+        function input() {
+            var input1 = document.getElementById('input1').value;
+            var input2 = document.getElementById('oper').value;
+            var input3 = document.getElementById('input3').value;
+            num1 = Number(input1);
+            oper = input2;
+            num2 = Number(input3);
+        };
         function calc() {
-            var num1 = document.getElementById('n1').value;
-            var num2 = document.getElementById('n2').value;
-            var oper = document.getElementById('op').value;
 
-            var output = document.getElementById('output');
             var str = '';
-            if (oper === "+") {
-                str += "더하기: " + (num1 + num2); 
-            } else if (oper === "-") {
-                str += "빼기: " + (num1 - num2);
-            } else if (oper === "*") {
-                str += "곱하기: " + (num1 * num2);
-            } else if (oper === "/"){
-                str += "나누기: " + (num1 / num2);
+            
+            if(oper === "+") {
+                str += "더하기:" + (num1 + num2) +"<br>";
+            } else if(oper === "-"){
+                str += "빼기:" + (num1 - num2) +"<br>";
+            } else if(oper === "*") {
+                str += "곱하기:" + (num1 * num2) +"<br>";
+            } else if(oper === "/") {
+                str += "나누기:" + (num1 / num2) +"<br>";
             } else {
-                str += "사칙연산만 입력해주세요.";
+                alert("올바른 사칙연산을 입력하세요");
             }
+         
+            return str;
+        }
 
-            // switch (oper) {
-            //     case "+":
-            //     str += "더하기: " + (num1 + num2);
-            //     break;
-            //     case "-":
-            //     str += "빼기: " + (num1 - num2);
-            //     break;
-            //     case "*":
-            //     str += "곱하기: " + (num1 * num2);
-            //     break;
-            //     case "/":
-            //     str += "나누기: " + (num1 / num2);
-            //     break;
-            //     default:
-            //     str += "사칙연산을 입력해주세요.";
-            // }
-            output.innerHTML = str;
-
+        function print() {
+            var output = document.getElementById('output');
+            output.innerHTML = calc();
+        }
+        function main() {
+            input();
+            print();
+            
         };
 
-
     </script>
-
 </body>
+
 </html>
