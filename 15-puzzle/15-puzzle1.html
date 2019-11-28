@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NumberPuzzle</title>
+    <style>
+    p {
+        font-size: 20px;
+    }
+    button {
+        font-size: 20px;
+        margin: 5px;
+    }
+    </style>
+</head>
+
+
+<body>
+    <h1>단어 움직이기 퍼즐</h1>
+    <div>
+        <p id="word1">HELLO</p>
+        <div id="word2"></div>
+        <div id="btn">
+            <button id="swap" onclick="swap(event)">뒤집기</button>
+            <button id="shift" onclick="shift(event)">밀어내기</button>
+        </div>
+        <p id="check">일치합니다.</p>
+
+    </div>
+        <script>
+            let str = document.getElementById('word1').innerHTML;
+            let word2 = document.getElementById('word2');
+
+            for(let i = 0; i<str.length; i++){
+                let btn = document.createElement('button');
+                btn.innerHTML = str[i];
+                word2.appendChild(btn);
+            };
+
+            function swap(event) {
+                console.log("swap");
+            };
+
+            function shift(event) {
+                console.log("shift");
+            };
+
+            
+        </script>
+</body>
+
+</html>
