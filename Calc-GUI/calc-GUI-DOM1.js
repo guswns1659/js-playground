@@ -3,20 +3,27 @@ let btn2 = document.getElementById('btn2');
 let btn3 = document.getElementById('btn3');
 let btn4 = document.getElementById('btn4');
 
+// setting 객체
+// 레이아웃 만드는 역할
 setting = {'row1' : [7,8,9,'/'],
            'row2' : [4,5,6,'*'],
            'row3' : [1,2,3,'-'],
            'row4' : ['BS',0,'=','+']
 };
-// 버튼한테 CSS  메소드
+// 버튼한테 CSS 적용하는 메소드
 setting.applyBtnCss = function (btn) {
     btn.style.width = "50px";
     btn.style.height = "50px";
     btn.style.margin = "10px";
     btn.style.fontSize = "30px";
-    btn.onclick = clickNumber;
+    if (btn.innerHTML === '=') {
+        btn.onclick = getResult;
+    } else {
+        btn.onclick = clickNumber;
+    }
 };
 
+// 버튼 만드는 메소드.. (아쉽..)
 setting.row1Addbtns = function () {
     for(let i =0; i<this.row1.length; i++){
         let btn = document.createElement('button');
@@ -50,6 +57,9 @@ setting.row4Addbtns = function () {
     }
 };
 
+// input 객체 
+// 입력받은 숫자를 계산할 수 있게 준비
+
 input = {'clickNumArray':[]
 };
 
@@ -57,6 +67,9 @@ input = {'clickNumArray':[]
 input.getInput = function () {
     return this.clickNumArray.join('');
 };
+
+// output 객체
+// 출력을 담당한다. 
 
 output = {};
 output.text = document.getElementById('output');
@@ -70,11 +83,26 @@ setting.row2Addbtns();
 setting.row3Addbtns();
 setting.row4Addbtns();
 
-
+// 버튼 핸들러 
 function clickNumber (event) {
     let clickNum = event.target.innerHTML;
-    input.clickNumArray.push(clickNum);
-    output.display();
+    if (clickNum === 'BS') {
+        input.clickNumArray.pop();
+    } else if (clickNum === '+' || clickNum === '-' || clickNum === '*' || clickNum === '/') {
+        input.clickNumArray.push(' '+clickNum+' ');
+    } else {
+        input.clickNumArray.push(clickNum);
+    }
+
+    if (input.clickNumArray.length === 0) {
+        output.text.innerHTML = 'Empty';
+    } else {
+        output.display();
+    }
+};
+
+function getResult (event) {
+    
 };
 
 

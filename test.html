@@ -1,17 +1,34 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>WordPuzzle</title>
+    <style>
+        p {
+            font-size: 20px;
+        }
+        button {
+            font-size: 20px;
+            margin: 5px;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="test">DOM으로 버튼 추가<br></div>
-    
-    <script src="add_button.js"></script>
+    <p id='progress'></p>
+    <p id="answer">word</p>
+    <div id='word'>
+        <!-- 버튼 자리 -->
+    </div>
+    <div>
+        <button id='swap' onclick='swap()'>뒤집기</button>
+        <button id='rshift' onclick='rshift()'>밀기-></button>
+        <button id='lshift' onclick='lshift()'><-밀기</button>
+    </div>
+    <p id='check'></p>
+    <p id='time'></p>
+    <script src='test.js'></script>
 </body>
-
 </html>
